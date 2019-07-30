@@ -5,7 +5,7 @@ import pandas as pd
 
 # 模型以及参数位置
 MODEL_NAME = "captcha_adam_binary_crossentropy_bs_256_epochs_50.h5"
-MODEL_PATH = 'model/85.1/'
+MODEL_PATH = 'model/84.84/'
 
 import sys
 sys.path.append(MODEL_PATH)
@@ -16,8 +16,8 @@ from pre_model import model
 TEST_NAME = glob.glob("data/Test_A/" + "*.jpg")
 OPT = 'adam'
 LOSS = 'binary_crossentropy'
-L2_ALPHA = 0.02
-dropout_ALPHA = 0.25
+L2_ALPHA = 0.01
+dropout_ALPHA = 0.35
 BATCH_SIZE = 256
 EPOCHS = 50
 input_shape = (150, 150, 3)
