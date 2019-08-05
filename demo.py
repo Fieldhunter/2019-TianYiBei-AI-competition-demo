@@ -15,11 +15,11 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 # 超参数
 OPT = 'adam'
 LOSS = 'binary_crossentropy'
-L2_ALPHA = 0.01
-dropout_ALPHA = 0.35
+dropout_ALPHA = 0.5
+L2_ALPHA = 0.02
 BATCH_SIZE = 256
-EPOCHS = 50
-IMAGE_SIZE = (150,150)
+EPOCHS = 45
+IMAGE_SIZE = (150, 150)
 
 # 参数
 DATA_PATH = "data/Trainset/"
@@ -98,7 +98,7 @@ def load_data():
 
 		# 随机平移
 		process_image = image.random_shift(process_image,
-										   0.2,
+										   0.3,
 										   0.3,
 										   row_axis=0,
 										   col_axis=1,
@@ -156,8 +156,8 @@ def load_data():
 			original_img = make_mask(original_img, mask_img)
 			original_img = original_process(np.float32(original_img))
 
-			# 以交叉的方式选取1501张图片为测试集
-			if train_or_test == 1 and len(X_test) <= 1500:
+			# 以交叉的方式选取1000张图片为测试集
+			if train_or_test == 1 and len(X_test) < 1000:
 				X_test.append(original_img)
 				Y_test.append(filename.lstrip(DATA_PATH)[0])
 				train_or_test = 0
