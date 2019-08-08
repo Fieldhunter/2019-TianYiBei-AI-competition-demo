@@ -19,7 +19,7 @@ dropout_ALPHA = 0.5
 L2_ALPHA = 0.02
 BATCH_SIZE = 256
 EPOCHS = 45
-IMAGE_SIZE = (150, 150)
+IMAGE_SIZE = (224, 224)
 
 # 参数
 DATA_PATH = "data/Trainset/"
@@ -83,7 +83,7 @@ def load_data():
 											  cval=0)
 			
 		# 随机投影变换
-		h, w = 150, 150
+		h, w = IMAGE_SIZE[0], IMAGE_SIZE[1]
 
 		ratio = np.random.normal(0.125, 0.075)
 		if ratio > 0.2:

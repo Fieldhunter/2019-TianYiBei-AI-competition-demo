@@ -48,7 +48,10 @@ def load_and_process_test():
 
 # 预测
 def predict(test, pre_model):
-	result = pre_model.predict(test.reshape(len(test), 150, 150, 3))
+	result = pre_model.predict(test.reshape(len(test),\
+							   IMAGE_SIZE[0], \
+							   IMAGE_SIZE[1], \
+							   3))
 	result = list(result.reshape(len(result),))
 
 	return result
