@@ -1,22 +1,23 @@
 from keras.models import *
 from keras.layers import *
-from keras.applications.vgg16 import VGG16
+from keras.applications.xception import Xception
 from keras import backend as K
 from keras import regularizers
 import tensorflow as tf
 
 
 """
-	超参数:
+	超参数：
 		OPT = 'adam'
 		LOSS = 'binary_crossentropy'
+		dropout_ALPHA = 0.5
 		BATCH_SIZE = 256
 		EPOCHS = 45
-		IMAGE_SIZE = (224, 224)
+		IMAGE_SIZE = (299, 299)
 """
 
 
-def model(input_shape, OPT, LOSS):
+def model(input_shape, OPT, LOSS, dropout_ALPHA):
 	def auc(y_true, y_pred):
 		def binary_PFA(y_true, y_pred, threshold=K.variable(value=0.5)):
 			y_pred = K.cast(y_pred >= threshold, 'float32')
@@ -44,15 +45,18 @@ def model(input_shape, OPT, LOSS):
 		return K.sum(s, axis=0)
 
 	# 构建不带分类器的预训练模型
-	base_model = VGG16(weights=
-						'/root/.keras/models/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5',
-					   include_top=False)
+	base_model = Xception(weights=\
+				'/root/.keras/models/xception_weights_tf_dim_ordering_tf_kernels_notop.h5',
+						  include_top=False)
 
 	# 添加全局平均池化层
 	x = base_model.output
 	x = GlobalAveragePooling2D()(x)
 
 	# 添加一个全连接层
+	x = Dropout(dropout_ALPHA)(x)
+	x = Dense(1024, activation='relu')(x)
+	x = Dropout(dropout_ALPHA)(x)
 	x = Dense(1024, activation='relu')(x)
 
 	# 添加一个分类器
@@ -60,11 +64,11 @@ def model(input_shape, OPT, LOSS):
 
 	model = Model(inputs=base_model.input, outputs=predictions)
 
-	# 锁住vgg16
+	# 锁住Xception
 	for layer in base_model.layers:
 		layer.trainable = False
 
-	# 编译模型
+	# 编译模型（一定要在锁层以后操作）
 	model.compile(optimizer=OPT, loss=LOSS, metrics=[auc])
 
 	return model
