@@ -3,9 +3,11 @@ from keras.preprocessing import image
 import numpy as np
 import pandas as pd
 
+
 # 模型以及参数位置
-MODEL_NAME = "captcha_adam_binary_crossentropy_bs_256_epochs_50.h5"
-MODEL_PATH = 'model/82.66/'
+MODEL_NAME = "captcha_adam_binary_crossentropy_bs_256_epochs_45.h5"
+MODEL_PATH = 'model/95.67/'
+
 
 import sys
 sys.path.append(MODEL_PATH)
@@ -16,11 +18,11 @@ from pre_model import model
 TEST_NAME = glob.glob("data/Test_A/" + "*.jpg")
 OPT = 'adam'
 LOSS = 'binary_crossentropy'
-dropout_ALPHA = 0.4
+dropout_ALPHA = 0.5
 BATCH_SIZE = 256
 EPOCHS = 50
-input_shape = (150, 150, 3)
-IMAGE_SIZE = (150, 150)
+input_shape = (299, 299, 3)
+IMAGE_SIZE = (299, 299)
 
 
 # 加载模型和参数
@@ -72,8 +74,8 @@ def save_csv(result):
 
 
 if __name__ == "__main__":
-	pre_model = load_model()
 	test = load_and_process_test()
+	pre_model = load_model()
 	result = predict(test, pre_model)
 	test_name_process()
 	save_csv(result)

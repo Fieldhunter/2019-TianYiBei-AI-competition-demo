@@ -2,7 +2,6 @@ from keras.models import *
 from keras.layers import *
 from keras.applications.inception_v3 import InceptionV3
 from keras import backend as K
-from keras import regularizers
 import tensorflow as tf
 
 

@@ -2,7 +2,6 @@ from keras.models import *
 from keras.layers import *
 from keras.applications.xception import Xception
 from keras import backend as K
-from keras import regularizers
 import tensorflow as tf
 
 
