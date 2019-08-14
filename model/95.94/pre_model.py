@@ -44,9 +44,7 @@ def model(input_shape, OPT, LOSS, dropout_ALPHA):
 		return K.sum(s, axis=0)
 
 	# 构建不带分类器的预训练模型
-	base_model = InceptionResNetV2(weights=\
-		'/root/.keras/models/inception_resnet_v2_weights_tf_dim_ordering_tf_kernels_notop.h5',
-								   include_top=False)
+	base_model = InceptionResNetV2(weights='imagenet', include_top=False)
 
 	# 添加全局平均池化层
 	x = base_model.output

@@ -43,9 +43,7 @@ def model(input_shape, OPT, LOSS):
 		return K.sum(s, axis=0)
 
 	# 构建不带分类器的预训练模型
-	base_model = VGG16(weights=
-						'/root/.keras/models/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5',
-					   include_top=False)
+	base_model = VGG16(weights='imagenet', include_top=False)
 
 	# 添加全局平均池化层
 	x = base_model.output
