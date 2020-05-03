@@ -1,4 +1,9 @@
 # 2019-TianYiBei-AI-competition-demo
+
+[![](https://img.shields.io/badge/license-MIT-green)](https://github.com/Fieldhunter/2019-TianYiBei-AI-competition-demo/blob/master/LICENSE)
+[![](https://img.shields.io/badge/author-Fieldhunter-blue)](https://github.com/Fieldhunter)
+![](https://img.shields.io/badge/frame-keras-yellow)
+
 2019“添翼杯”人工智能创新应用大赛-智慧环保赛道---代码敲不队demo
 
 ## 最终score
